@@ -778,11 +778,6 @@
       <button class="tab" onclick="switchTab('live')"> Live Now</button>
     </div>
 
-    <!-- AdSense: top banner -->
-    <div class="ad-space ad-space-top">
-      <div class="ad-placeholder" id="adTop"></div>
-    </div>
-
     <!-- Date nav (fixtures only) -->
     <div class="date-nav" id="dateNav">
       <button onclick="changeDate(-1)">‹</button>
@@ -960,15 +955,7 @@ async function loadContent() {
         </div>`;
       return;
     }
-<script>
-  atOptions = {
-    'key' : '1e1cd0ab13f7171e84fcb0e482565fe6',
-    'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
-    'params' : {}
-  };
-</script>
+
 <script src="https://www.highrevenueformat.com/1e1cd0ab13f7171e84fcb0e482565fe6/invoke.js"></script>
 
     content.innerHTML = allMatches.map(group => `
@@ -994,7 +981,15 @@ async function loadContent() {
       </div>`;
   }
 }
-
+<script>
+  atOptions = {
+    'key' : '1e1cd0ab13f7171e84fcb0e482565fe6',
+    'format' : 'iframe',
+    'height' : 60,
+    'width' : 468,
+    'params' : {}
+  };
+</script>
 // ── Load live ──────────────────────────────────────────────────────────────
 async function loadLive() {
   const content = document.getElementById('content');
@@ -1037,7 +1032,7 @@ async function loadLive() {
       </div>`;
   }
 }
-<script async="async" data-cfasync="false" src="https://pl31186605.profitableratecpmnetwork.com/a323c1684b1202510204361e84eadfea/invoke.js"></script>
+
 <div id="container-a323c1684b1202510204361e84eadfea"></div>
 
 // ── Render cards ───────────────────────────────────────────────────────────
@@ -1084,7 +1079,7 @@ function renderMatchCard(m) {
       ${action}
     </div>`;
 }
-<script src="https://pl31186604.profitableratecpmnetwork.com/e5/b4/4a/e5b44a50f4567d173fa29f8c9c8584e2.js"></script>
+
 
 function renderLiveCard(m) {
   const hasStream = m.streams && m.streams.length > 0;
