@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LiveKick</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.7/hls.min.js"></script>
+
+<!-- Optional External Ad Network Scripts (Kept at Head Level for Global Loading) -->
+<script src="https://pl31186602.profitableratecpmnetwork.com/de/55/5d/de555d8cbfaf438f888eeb1d56b46102.js" async></script>
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -149,7 +153,7 @@
     font-weight: 700;
   }
 
-  /* Main */
+  /* Main Area */
   .main {
     margin-left: 268px;
     flex: 1;
@@ -163,7 +167,7 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
   }
 
   .topbar h2 {
@@ -178,6 +182,35 @@
     color: var(--text2);
     font-weight: 600;
     white-space: nowrap;
+  }
+
+  /* Non-intrusive Ad Container Layouts */
+  .ad-wrapper {
+    width: 100%;
+    margin: 18px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ad-wrapper::before {
+    content: "SPONSORED";
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .ad-wrapper-inline {
+    min-height: 70px;
   }
 
   /* Tabs */
@@ -196,7 +229,7 @@
     padding: 9px 16px;
     background: transparent;
     border: none;
-    border-radius: 9px;
+    border-radius: 99px;
     cursor: pointer;
     font-size: 12px;
     font-weight: 700;
@@ -212,7 +245,7 @@
     box-shadow: 0 2px 7px rgba(15,23,42,.08);
   }
 
-  /* Date navigation */
+  /* Date Navigation */
   .date-nav {
     display: flex;
     align-items: center;
@@ -253,13 +286,7 @@
     letter-spacing: .7px;
   }
 
-  /* Competition heading injected by JS */
-  #content > div > div:first-child:not(.matches-grid),
-  .live-header {
-    position: relative;
-  }
-
-  /* Match cards */
+  /* Matches Grid & Cards */
   .matches-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -275,14 +302,6 @@
     box-shadow: var(--shadow);
     transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     overflow: hidden;
-  }
-
-  .match-card::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: transparent;
   }
 
   .match-card:hover {
@@ -378,19 +397,8 @@
     font-variant-numeric: tabular-nums;
   }
 
-  .score-sep {
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--muted);
-  }
-
-  .vs-text {
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--muted);
-    padding: 0 13px;
-    flex-shrink: 0;
-  }
+  .score-sep { font-size: 18px; font-weight: 400; color: var(--muted); }
+  .vs-text { font-size: 12px; font-weight: 800; color: var(--muted); padding: 0 13px; flex-shrink: 0; }
 
   .watch-btn {
     width: 100%;
@@ -427,7 +435,6 @@
     font-weight: 600;
   }
 
-  /* Live section */
   .live-header {
     display: flex;
     align-items: center;
@@ -435,11 +442,7 @@
     margin-bottom: 16px;
   }
 
-  .live-header h3 {
-    font-size: 17px;
-    font-weight: 800;
-    letter-spacing: -.2px;
-  }
+  .live-header h3 { font-size: 17px; font-weight: 800; letter-spacing: -.2px; }
 
   .live-count {
     background: var(--live-dim);
@@ -467,11 +470,7 @@
     border-radius: var(--radius);
   }
 
-  .loading-state .spinner {
-    border-top-color: var(--brand);
-    border-color: #dbe4f0;
-  }
-
+  .loading-state .spinner { border-top-color: var(--brand); border-color: #dbe4f0; }
   .empty-state .icon { font-size: 38px; opacity: .8; }
 
   .retry-btn {
@@ -486,19 +485,16 @@
     transition: .18s ease;
   }
 
-  .retry-btn:hover {
-    background: var(--surface2);
-    border-color: #cbd5e1;
-  }
+  .retry-btn:hover { background: var(--surface2); border-color: #cbd5e1; }
 
-  /* Player modal */
+  /* Player Modal (Highest Z-index to prevent ad overlap) */
   .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(2, 6, 23, .82);
-    backdrop-filter: blur(7px);
-    z-index: 1000;
+    background: rgba(2, 6, 23, .85);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -607,68 +603,7 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-
-  /* ── AdSense-ready ad spaces ── */
-  .ad-space {
-    width: 100%;
-    min-height: 100px;
-    margin: 20px 0 24px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    position: relative;
-  }
-
-  .ad-space::before {
-    content: "ADVERTISEMENT";
-    position: absolute;
-    top: 7px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 8px;
-    font-weight: 800;
-    letter-spacing: 1.2px;
-    color: #b0b8c5;
-    pointer-events: none;
-  }
-
-  .ad-space-top {
-    min-height: 90px;
-    margin-top: 0;
-  }
-
-  .ad-space-between {
-    min-height: 100px;
-    margin: 28px 0;
-  }
-
-  .ad-space-bottom {
-    min-height: 120px;
-    margin: 30px 0 0;
-  }
-
-  .ad-placeholder {
-    width: 100%;
-    min-height: 70px;
-  }
-
-  @media (max-width: 700px) {
-    .ad-space {
-      min-height: 90px;
-      margin: 18px 0 20px;
-    }
-
-    .ad-space-top {
-      min-height: 80px;
-    }
-  }
-
-  /* Responsive */
+  /* Responsive Rules */
   @media (max-width: 900px) {
     .sidebar { width: 225px; }
     .main { margin-left: 225px; width: calc(100% - 225px); }
@@ -687,10 +622,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .sidebar-logo {
-      padding: 17px 18px 14px;
-    }
-
+    .sidebar-logo { padding: 17px 18px 14px; }
     .sidebar-section { padding: 13px 15px 7px; }
 
     .league-btn {
@@ -733,17 +665,13 @@
     .team-crest { width: 44px; height: 44px; }
     .score-num { font-size: 22px; }
   }
-
 </style>
-
- <script src="https://pl31186602.profitableratecpmnetwork.com/de/55/5d/de555d8cbfaf438f888eeb1d56b46102.js"></script>
-
 </head>
 <body>
 
 <div class="layout">
 
-  <!-- ── Sidebar ── -->
+  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-logo">
       <h1>LiveKick</h1>
@@ -755,53 +683,63 @@
     </div>
   </aside>
 
-  <!-- ── Main ── -->
+  <!-- Main Content -->
   <main class="main">
     <div class="topbar">
       <h2 id="pageTitle">Today's Matches</h2>
       <span class="topbar-date" id="topbarDate"></span>
     </div>
-<script>
-  atOptions = {
-    'key' : 'e6925e6f7f635e074d18389f5c7628de',
-    'format' : 'iframe',
-    'height' : 300,
-    'width' : 160,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/e6925e6f7f635e074d18389f5c7628de/invoke.js"></script>
 
-    <!-- Tabs -->
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('fixtures')">Fixtures</button>
-      <button class="tab" onclick="switchTab('live')"> Live Now</button>
+    <!-- Structured Header Banner Ad -->
+    <div class="ad-wrapper">
+      <script>
+        atOptions = {
+          'key' : 'e6925e6f7f635e074d18389f5c7628de',
+          'format' : 'iframe',
+          'height' : 300,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highrevenueformat.com/e6925e6f7f635e074d18389f5c7628de/invoke.js"></script>
     </div>
 
-    <!-- Date nav (fixtures only) -->
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('fixtures', event)">Fixtures</button>
+      <button class="tab" onclick="switchTab('live', event)">Live Now</button>
+    </div>
+
+    <!-- Date Navigation -->
     <div class="date-nav" id="dateNav">
       <button onclick="changeDate(-1)">‹</button>
       <span id="dateLabel"></span>
       <button onclick="changeDate(1)">›</button>
     </div>
 
-    <!-- Content -->
+    <!-- Matches Content Area -->
     <div id="content">
       <div class="loading-state"><div class="spinner"></div><span>Loading matches…</span></div>
     </div>
-<script>
-  atOptions = {
-    'key' : '379ed8e1b2601a06ca5e9fa28fc1d5f5',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/379ed8e1b2601a06ca5e9fa28fc1d5f5/invoke.js"></script>
 
+    <!-- Structured Footer Banner Ad -->
+    <div class="ad-wrapper ad-wrapper-inline">
+      <script>
+        atOptions = {
+          'key' : '379ed8e1b2601a06ca5e9fa28fc1d5f5',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highrevenueformat.com/379ed8e1b2601a06ca5e9fa28fc1d5f5/invoke.js"></script>
+    </div>
 
-<!-- ── Player modal ── -->
+  </main>
+</div>
+
+<!-- Player Modal -->
 <div class="modal-overlay" id="playerModal">
   <div class="modal">
     <div class="modal-header">
@@ -824,24 +762,24 @@
 <script>
 const BASE = 'https://colddfootball.neckhards.org';
 
-// ── State ──────────────────────────────────────────────────────────────────
+// State Management
 let currentDate      = new Date();
 let currentTab       = 'fixtures';
 let currentCode      = 'ALL';
 let competitions     = [];
 let liveInterval     = null;
 let hls              = null;
-let currentStreams    = [];
+let currentStreams   = [];
 let currentServerIdx = 0;
 
-// ── Init ───────────────────────────────────────────────────────────────────
+// Initialization
 document.addEventListener('DOMContentLoaded', () => {
   setDateLabel();
   loadCompetitions();
   loadContent();
 });
 
-// ── Date helpers ───────────────────────────────────────────────────────────
+// Date Formatting
 function formatDate(d) {
   return d.toISOString().split('T')[0];
 }
@@ -860,11 +798,12 @@ function changeDate(delta) {
   loadContent();
 }
 
-// ── Tab switch ─────────────────────────────────────────────────────────────
-function switchTab(tab) {
+// Tab Switching
+function switchTab(tab, evt) {
   currentTab = tab;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
+  if (evt && evt.target) evt.target.classList.add('active');
+  
   document.getElementById('dateNav').style.display = tab === 'fixtures' ? 'flex' : 'none';
 
   if (liveInterval) { clearInterval(liveInterval); liveInterval = null; }
@@ -877,7 +816,7 @@ function switchTab(tab) {
   }
 }
 
-// ── League sidebar ─────────────────────────────────────────────────────────
+// Competition List
 async function loadCompetitions() {
   try {
     const res  = await fetch(`${BASE}/api/competitions`);
@@ -901,7 +840,7 @@ async function loadCompetitions() {
     `;
   } catch(e) {
     document.getElementById('leagueList').innerHTML =
-      '<div style="padding:16px;color:var(--muted);font-size:13px">Failed to load</div>';
+      '<div style="padding:16px;color:var(--muted);font-size:13px">Failed to load competitions</div>';
   }
 }
 
@@ -914,7 +853,7 @@ function selectLeague(code, btn) {
   loadContent();
 }
 
-// ── Load fixtures ──────────────────────────────────────────────────────────
+// Load Fixtures
 async function loadContent() {
   if (currentTab !== 'fixtures') return;
   const content = document.getElementById('content');
@@ -956,8 +895,6 @@ async function loadContent() {
       return;
     }
 
-<script src="https://www.highrevenueformat.com/1e1cd0ab13f7171e84fcb0e482565fe6/invoke.js"></script>
-
     content.innerHTML = allMatches.map(group => `
       <div style="margin-bottom:28px">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:0 4px">
@@ -966,9 +903,6 @@ async function loadContent() {
         </div>
         <div class="matches-grid">
           ${group.matches.map(m => renderMatchCard(m)).join('')}
-        </div>
-        <div class="ad-space ad-space-between">
-          <div class="ad-placeholder"></div>
         </div>
       </div>
     `).join('');
@@ -981,16 +915,8 @@ async function loadContent() {
       </div>`;
   }
 }
-<script>
-  atOptions = {
-    'key' : '1e1cd0ab13f7171e84fcb0e482565fe6',
-    'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
-    'params' : {}
-  };
-</script>
-// ── Load live ──────────────────────────────────────────────────────────────
+
+// Load Live Matches
 async function loadLive() {
   const content = document.getElementById('content');
   if (!content.querySelector('.matches-grid') && !content.querySelector('.empty-state')) {
@@ -1019,9 +945,6 @@ async function loadLive() {
       </div>
       <div class="matches-grid">
         ${matches.map(m => renderLiveCard(m)).join('')}
-      </div>
-      <div class="ad-space ad-space-between">
-        <div class="ad-placeholder"></div>
       </div>`;
 
   } catch(e) {
@@ -1033,9 +956,7 @@ async function loadLive() {
   }
 }
 
-<div id="container-a323c1684b1202510204361e84eadfea"></div>
-
-// ── Render cards ───────────────────────────────────────────────────────────
+// Card Renderers
 function renderMatchCard(m) {
   const isLive     = m.status === 'LIVE';
   const isFinished = m.status === 'FINISHED';
@@ -1080,7 +1001,6 @@ function renderMatchCard(m) {
     </div>`;
 }
 
-
 function renderLiveCard(m) {
   const hasStream = m.streams && m.streams.length > 0;
   const action = hasStream
@@ -1112,9 +1032,9 @@ function renderLiveCard(m) {
     </div>`;
 }
 
-// ── Player ─────────────────────────────────────────────────────────────────
+// Player Logic
 function openPlayer(streams, title) {
-  currentStreams    = streams;
+  currentStreams   = streams;
   currentServerIdx = 0;
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('playerModal').classList.add('open');
@@ -1147,7 +1067,6 @@ function playStream(idx) {
   const status = document.getElementById('playerStatus');
   const statusText = document.getElementById('statusText');
 
-  // Update server buttons
   document.querySelectorAll('.server-btn').forEach((b, i) => {
     b.classList.toggle('active', i === idx);
   });
@@ -1190,7 +1109,6 @@ function playStream(idx) {
       }
     });
   } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    // Safari native HLS
     video.src = url;
     video.addEventListener('loadedmetadata', () => { status.style.display = 'none'; video.play(); });
     video.addEventListener('error', () => {
@@ -1202,16 +1120,11 @@ function playStream(idx) {
   }
 }
 
-// ── AdSense integration ─────────────────────────────────────────────────────
-// Replace the placeholder elements with your official AdSense ad units after
-// AdSense approves the site. No publisher ID is hard-coded here.
-
-// Close modal on overlay click
+// Global Event Listeners
 document.getElementById('playerModal').addEventListener('click', function(e) {
   if (e.target === this) closePlayer();
 });
 
-// Keyboard shortcut
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closePlayer();
 });
